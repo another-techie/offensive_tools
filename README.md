@@ -6,9 +6,8 @@ Use of these scripts against targets without expressly written consent from the 
 # Purpose and Structure
 This repository is a collection of offensive security scripts I'm working on out of curiosity. Most of them work, but may be a little buggy. These scripts haven't been battle tested during penetration tests. My efforts here are primarily educational. My goal is to produce functional tools more so than the highest quality tools.
 
-The tools are organized in folders by purpose. Readmes for each script are present in the respective folders. The one exception is scanning and enumeration scripts which are currently stored in the root of this repository.
 
-# Port Scan
+## Port Scan
 This script is a basic port scanner with banner grabbing. Presently, it only support TCP scanning. UDP support may be added in the future.
 
 ```
@@ -26,4 +25,23 @@ options:
                    disabled by default.
   -c               Show closed ports. Display of closed ports is disabled by
                    default
+```
+
+## Brute Forcer
+This script is a brute forcer for network protocols. The number of concurrent threads can be specified, but a default value is available on a per protocol basis. This is to prevent accidental an DOS attack against the target server. Presently the supported protocols are:
+* SSH
+* FTP
+```
+usage: brute_force.py [-h] [-p SERVICE_PORT] -u USERNAME -w WORDLIST [-t THREADS] [-a] target_host
+
+positional arguments:
+  target_host      Specify target host in the format protocol://host
+
+options:
+  -h, --help       show this help message and exit
+  -p SERVICE_PORT  Target port
+  -u USERNAME      Username
+  -w WORDLIST      Wordlist with passwords
+  -t THREADS       Number of concurrent connections
+  -a               Show all attempted logins
 ```
