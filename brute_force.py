@@ -89,7 +89,7 @@ def validate_target(target_host, port):
             target_specification['port'] = target_port
         
         else:
-            print(colored("[!!] invalid port specified", 'red'))
+            print(colored("[--] Invalid port specified", 'red'))
             exit()
 
     return target_specification
@@ -141,7 +141,7 @@ def connect_to_ftp(target_host, ftp_port, username, password, event, show_attemp
         if not event.is_set() and show_attempts:
             print(colored(("[-] Incorrect password: {}".format(password)), 'light_red'))
         ftp.quit()
-        
+
     except error_reply:
         print(colored("[--] Unexpected reply received from the target", 'red'))
         event.set()

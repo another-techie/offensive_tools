@@ -36,7 +36,7 @@ def scan_port(target_host, target_port, banner, print_closed_ports):
 		
 	except:
 		if print_closed_ports:
-			print(colored("[!] {}/tcp: Closed".format(target_port), 'magenta'))
+			print(colored("[-] {}/tcp: Closed".format(target_port), 'magenta'))
 
 	finally:
 		sock.close()
@@ -49,7 +49,7 @@ def validate_host(target_host):
 		return resolved_host
 	
 	except socket.gaierror:
-		print(colored("[!!] Unknown host: {}".format(target_host), 'red'))
+		print(colored("[--] Unknown host", 'red'))
 		exit()
 
 	except:
@@ -60,7 +60,7 @@ def validate_host(target_host):
 
 		# No resolable host or valid IPv4 address
 		except ValueError:
-					print(colored("[!!] Unknown host: {}".format(target_host), 'red'))
+					print(colored("[--] Unknown host", 'red'))
 					exit()
 
 
@@ -94,9 +94,9 @@ def scan_ports(target_host, target_ports, single_port=False, get_banner=False, b
 		
 
 def split_ports(target_ports):
-	"""Split a list of ports seperated by commas or expand a passed port range."""
+	"""Split a list of ports separated by commas or expand a passed port range."""
 
-	# Comma seperated list of ports
+	# Comma separated list of ports
 	if ',' in target_ports:
 		
 		target_ports = target_ports.split(",")
@@ -121,7 +121,7 @@ def split_ports(target_ports):
 			return expanded_port_range
 		
 		except ValueError:
-			print(colored("[!!] invalid ports specified: {}".format(target_ports), 'red'))
+			print(colored("[--] Invalid ports specified", 'red'))
 			exit()
 
 	else:
@@ -130,11 +130,11 @@ def split_ports(target_ports):
 			return (target_port,)
 		
 		except ValueError:
-			print(colored("[!!] invalid ports specified: {}".format(target_ports), 'red'))
+			print(colored("[--] Invalid ports specified", 'red'))
 			exit()
 
 		except TypeError:
-			print(colored("[!!] invalid ports specified: {}".format(target_ports), 'red'))
+			print(colored("[--] Invalid ports specified", 'red'))
 			exit()
 
 
@@ -165,7 +165,7 @@ def main():
 
 
 	target_ports = split_ports(args.target_ports)
-	
+
 	single_port = single_port_check(target_ports)
 	
 	if single_port:
