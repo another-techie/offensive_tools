@@ -210,5 +210,63 @@ class test_brute_force_support(unittest.TestCase):
             target_specification = validate_target('ssh://127.0.0.1', '21,22,25')
 
 
+# Hash cracking tests
+class test_hash_cracking(unittest.TestCase):
+
+    def test_hash_generation(self):
+        '''
+        Commands used to generate test hashes:
+        NTLM: https://codebeautify.org/ntlm-hash-generator
+        MD5: echo -n 'baseball12345' | md5sum
+        SHA1: echo -n 'baseball12345' | sha1sum
+        SHA224: echo -n 'baseball12345' | sha224sum
+        SHA256: echo -n 'baseball12345' | sha256sum
+        SHA384: echo -n 'baseball12345' | sha384sum
+        SHA512: echo -n 'baseball12345' | sha512sum
+        SHA3_224: echo -n 'baseball12345' | openssl dgst -sha3-224
+        SHA3_256: echo -n 'baseball12345' | openssl dgst -sha3-256
+        SHA3_384: echo -n 'baseball12345' | openssl dgst -sha3-384
+        SHA3_512: echo -n 'baseball12345' | openssl dgst -sha3-512
+        '''
+
+        test_beginning(self)
+
+        hash_input = 'baseball12345'.encode()
+
+        ntlm_hash = ntlm('baseball12345')
+        self.assertEqual(ntlm_hash, '15d20bb5a8a7c13882eb179514f640d3')
+
+        md5_hash = md5(hash_input)
+        self.assertEqual(md5_hash, '4f1a265431269fca7cc1cf7de92e608d')
+
+        sha1_hash = sha1(hash_input)
+        self.assertEqual(sha1_hash, 'c5cc1a7f95e3a2d8d98bf2e579100019f7279ef1')
+
+        sha224_hash = sha224(hash_input)
+        self.assertEqual(sha224_hash, '4f97ef09cd9ee0803a89efd838908c91f2e4d7ff783041409d581e86')
+
+        sha256_hash = sha256(hash_input)
+        self.assertEqual(sha256_hash, '7130b1ffb6c776db47845f2f338e94f327940beb68840aae985c2f903d156963')
+
+        sha384_hash = sha384(hash_input)
+        self.assertEqual(sha384_hash, '5213b56384d59f953ec4fa75e61a467faf6ea791da54b071b8985d1fd6a54423246ede3a29dd38bc6a4471878b7a414b')
+
+        sha512_hash = sha512(hash_input)
+        self.assertEqual(sha512_hash, '62b13f88964796073f269a00388d0f58a4996b5c0ad8fa2f2791d067935185e127b21643e8661a6389a95bb5685f89d8601e412adb77f3defa27f3b9fcf620b1')
+
+        sha3_224_hash = sha3_224(hash_input)
+        self.assertEqual(sha3_224_hash, '5e5d0def6d4941686b30e4a2618eb26d1741043d80217747b623df56')
+
+        sha3_256_hash = sha3_256(hash_input)
+        self.assertEqual(sha3_256_hash, '44125c4b1b06c0cf687166dd5b4e992a1d5212afd196e5a338e4fca44922e895')
+
+        sha3_384_hash = sha3_384(hash_input)
+        self.assertEqual(sha3_384_hash, 'dced9bd897c36b12a4729ebc92844e40b0944740c0660c5b87e433d176ed06f68ae9b6369faf2c4ce17d63fd4b9416ac')
+
+        sha3_512_hash = sha3_512(hash_input)
+        self.assertEqual(sha3_512_hash, 'e8db926f562c08bdc321df5b1222f2ebafdfcc6991fa1b20007d62a68c11034307081d9177133580c3861ec4fa2d28676cc564cfe5a215efce7f94d6af992971')
+
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -15,6 +15,7 @@ def chunk_wordlist(wordlist, number_of_threads):
         print(colored("Threads: {}".format(number_of_threads), 'blue'))
 
         print(colored("Assigning ~ {} passwords per thread".format(passwords_per_list), 'blue'))
+        print("\n")
         
         all_wordlist_chunks = []
         wordlist_chunk = []
